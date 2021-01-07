@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block page_content %}
+<p>name: {{ current_user.name }}</p>
+<p>email: {{ current_user.email }}</p>
+<p>status: {{ current_user.role }}</p>
+{% if current_user.role=='admin' %}
+    <div>
+    {{ wtf.quick_form(form) }}
+    </div>
+{% endif %}
+{% endblock page_content %}

@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block page_content %}
+    {% for book in books.items %}
+        <h1>Title: {{ book.title }}</h1>
+        <p>Author: {{ book.author }}</p>
+        <p>Summary: {{ book.summary }}</p>
+        <p>
+            <button value="">Add To Cart</button>
+            <button value="">Take Off Cart</button>
+            {% if current_user.role=='admin'%}
+            <a class="btn btn-secondary" href="{{ url_for('books.edit_book', book_id=book.id) }}">Edit</a>
+            {% endif %}
+        </p>
+        <hr/>
+    {% endfor %}
+
+    {% for page_num in books.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+            {% if books.page == page_num %}
+                <a class="btn btn-info mb-4" href="{{ url_for('main.index', page=page_num) }}">{{ page_num }}</a>
+            {% else %}
+                <a class="btn btn-outline-info mb-4" href="{{ url_for('main.index', page=page_num) }}">{{ page_num }}</a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+
+{% endblock page_content %}
