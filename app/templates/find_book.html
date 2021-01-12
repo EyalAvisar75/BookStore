@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block page_content %}
+        <h1>Title: {{ book.title }}</h1>
+        <p>Author: {{ book.author }}</p>
+        <p>Summary: {{ book.summary }}</p>
+        <p>
+            <button value="">Add To Cart</button>
+            <button value="">Take Off Cart</button>
+            {% if current_user.role=='admin'%}
+            <a class="btn btn-secondary" href="{{ url_for('books.edit_book', book_id=book.id) }}">Edit</a>
+            <a class="btn btn-danger" href="{{ url_for('books.delete_book', book_id=book.id) }}">Delete</a>
+            {% endif %}
+        </p>
+        <hr/>
+
+{% endblock page_content %}
